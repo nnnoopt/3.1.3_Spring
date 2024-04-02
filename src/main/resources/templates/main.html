@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>My Users</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Name</th>
+        <th>LastName</th>
+        <th>Age</th>
+        <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.username}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.lastname}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.roles}"></td>
+        <td><a th:href="@{'/admin/update/' + ${user.id}}">Update</a></td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+<div class="add-button">
+    <a th:href="@{/admin/new}">
+        <button>Create New User</button>
+    </a>
+</div>
+
+<div class="add-button">
+    <a th:href="@{/logout}">
+        <button>Logout</button>
+    </a>
+</div>
+
+</body>
+</html>

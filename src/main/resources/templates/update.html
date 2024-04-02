@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update</title>
+</head>
+<body>
+
+
+<form action="#" th:action="@{'/admin/update/' + ${user.id}}" method="post" th:object="${user}">
+    <input type="hidden" th:field="*{id}" />
+    <p>Username: <input type="text" th:field="*{username}" /></p>
+    <p>Password: <input type="text" th:field="*{password}" /></p>
+    <p>Name: <input type="text" th:field="*{name}" /></p>
+    <p>Last Name: <input type="text" th:field="*{lastname}" /></p>
+    <p>Age: <input type="text" th:field="*{age}" /></p>
+
+
+    <p>
+        <label for="role">Select role: </label>
+        <select id="role" name="role" multiple required>
+            <option th:each="role : ${allRoles}" th:value="${role.role}" th:text="${role.role}"></option>
+        </select>
+    </p>
+
+
+    <p><button type="submit">Update</button></p>
+</form>
+
+<form action="#" th:action="@{'/admin/delete/' + ${user.id}}" method="post">
+    <input type="hidden" th:field="*{user.id}" />
+    <p><button type="submit">Delete</button></p>
+</form>
+
+<div class="add-button">
+    <a th:href="@{/logout}">
+        <button>Logout</button>
+    </a>
+</div>
+
+</body>
+</html>
