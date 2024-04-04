@@ -5,9 +5,10 @@ import ru.itmentor.spring.boot_security.demo.models.Role;
 import ru.itmentor.spring.boot_security.demo.models.User;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -31,14 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User deleteUser(long id) {
-        User user = null;
-        try {
-            user = userDaoHibernate.deleteUser(id);
-        } catch (EntityNotFoundException e) {
-            e.printStackTrace();
-        }
-        return user;
+    public void deleteUser(long id) {
+        userDaoHibernate.deleteUser(id);
     }
 
     @Override
@@ -47,8 +42,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void createUser(User user) {
+        userDaoHibernate.createUser(user);
+    }
+
+    @Override
     public void updateUser(User user, String[] role) {
         userDaoHibernate.updateUser(user, role);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userDaoHibernate.updateUser(user);
     }
 
     @Override
@@ -60,4 +65,13 @@ public class UserServiceImpl implements UserService {
     public List<Role> getRoles() {
         return userDaoHibernate.getRoles();
     }
+
+//    @Override
+//    public Set<Role> getSetOfRoles(List<String> rolesId){
+//        Set<Role> roleSet = new HashSet<>();
+//        for (String id: rolesId) {
+//            roleSet.add(roleServices.getRoleById(Long.parseLong(id)));
+//        }
+//        return roleSet;
+//    }
 }

@@ -23,7 +23,12 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void createUser(User user, String[] roles) {
         entityManager.persist(createUserWithRoles(user, roles));
-        entityManager.flush();
+//        entityManager.flush();
+    }
+
+    @Override
+    public void createUser(User user) {
+        entityManager.persist(user);
     }
 
     @Override
@@ -57,18 +62,29 @@ public class UserDaoHibernateImpl implements UserDao {
     @Override
     public void updateUser(User user, String[] role) {
         entityManager.merge(createUserWithRoles(user, role));
-        entityManager.flush();
+//        entityManager.flush();
     }
 
     @Override
-    public User deleteUser(long id) throws EntityNotFoundException {
+    public void updateUser(User user) {
+        entityManager.merge(user);
+    }
+
+    @Override
+    public void deleteUser(long id) throws EntityNotFoundException {
         User user = readUser(id);
         if (user == null) {
             throw new EntityNotFoundException("Пользователь не найден");
         }
         entityManager.remove(user);
-        entityManager.flush();
-        return user;
+//        entityManager.flush();
+    }
+
+    private User addRolesUser(User oldUser, User newUser) {
+        getRoles().stream()
+                .filter(roleBD -> oldUser.getRoles().stream().anyMatch(roleUser -> roleBD.getRole().equals(roleUser.getRole())))
+                .forEach(newUser::addRole);
+        return newUser;
     }
 
     @Override

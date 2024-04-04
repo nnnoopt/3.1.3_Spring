@@ -8,14 +8,16 @@ import java.util.List;
 public interface UserDao {
 
     void createUser(User user, String[] roles);
+    void createUser(User user);
 
     User readUser(long id);
 
     void updateUser(User user, String[] roles);
+    void updateUser(User user);
 
     List<User> getUsers();
 
-    User deleteUser(long id);
+    void deleteUser(long id);
     User getByName(String name);
 
     List<Role> getRoles();

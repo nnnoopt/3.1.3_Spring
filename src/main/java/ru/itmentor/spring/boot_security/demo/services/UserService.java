@@ -10,13 +10,17 @@ public interface UserService {
 
     User readUser(long id);
 
-    User deleteUser(long parseUnsignedInt);
+    void deleteUser(long id);
 
     void createUser(User user, String[] role);
 
+    void createUser(User user);
+
     void updateUser(User user, String[] role);
+    void updateUser(User user);
 
     User getByName(String name);
 
     List<Role> getRoles();
+
 }
