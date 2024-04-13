@@ -1,6 +1,5 @@
 package ru.itmentor.spring.boot_security.demo.controllers;
 
-
 import org.springframework.web.bind.annotation.*;
 import ru.itmentor.spring.boot_security.demo.models.User;
 import ru.itmentor.spring.boot_security.demo.services.UserService;
@@ -45,5 +44,5 @@ public class ControllerREST {
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return "Deleted " + id + ".";
-    }
+    } 
 }
